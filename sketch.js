@@ -2,36 +2,47 @@
 let heartLine1 = [];
 let heartLine2 = [];
 let heartLine3 = [];
+let heartLine4 = [];
 
 function setup() {
-  createCanvas(400, 400);
-  for (x = 0; x < 3; x++){
+  createCanvas(windowWidth, windowHeight);
+  for (x = 0; x < 10; x++){
     let rx = random(15, width - 15); // -> Begining x position 
-    heartLine1[x] = new Heart(rx, 100, 40); // -> Set up first line 
-    heartLine2[x] = new Heart(rx, 200, 30); // -> Set up second line
-    heartLine3[x] = new Heart(rx, 300, 10); // Set up third line 
+    heartLine1[x] = new Heart(rx, 100, 50); // -> Set up first line 
+    heartLine2[x] = new Heart(rx, 250, 50); // -> Set up second line
+    heartLine3[x] = new Heart(rx, 400, 50); // Set up third line 
+    heartLine4[x] = new Heart(rx, 550, 50); // Set up third line 
   }
 }
 
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
+}
 
 function draw() {
-  background(220);
+  background(255, 240, 240);
   for (x = 0; x < heartLine1.length; x++){ // -> 1st line's show, move and checkEdges
     heartLine1[x].move();
-    heartLine1[x].show();
+    heartLine1[x].show(color(73, 36, 62, 160));
     heartLine1[x].checkEdges();
   }
 
   for (x = 0; x < heartLine2.length; x++){ // -> 2nd line's show, move and checkEdges
     heartLine2[x].move();
-    heartLine2[x].show();
+    heartLine2[x].show(color(112, 66, 100, 160));
     heartLine2[x].checkEdges();
   }
 
   for (x = 0; x < heartLine3.length; x++){ // -> 3nd line's show, move and checkEdges
     heartLine3[x].move();
-    heartLine3[x].show();
+    heartLine3[x].show(color(187, 132, 147, 160));
     heartLine3[x].checkEdges();
+  }
+
+  for (x = 0; x < heartLine4.length; x++){ // -> 3nd line's show, move and checkEdges
+    heartLine4[x].move();
+    heartLine4[x].show(color(219, 175, 160, 160));
+    heartLine4[x].checkEdges();
   }
 }
 
@@ -47,8 +58,8 @@ class Heart { // Creating a "Heart" class
     this.y = this.y; // Move x position randomly from -4 to 4
   }
 
-  show(){
-    fill(255, 0, 0, 160); // Heart colour 
+  show(fillColor){
+    fill(fillColor); // Heart colour 
     noStroke(); // Heart w/o stroke 
     heartShape(this.x, this.y, this.r); // Draw heart shape
   }
